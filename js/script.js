@@ -9,23 +9,8 @@ var result = document.querySelector('#result'),
 var context;
 var myAudioBuffer = null;
 var bpmx = 1;
-var images = [], x = -1;
-images[0] = "img/a.jpg";
-images[1] = "img/b.jpg";
-images[2] = "img/c.jpg";
-images[3] = "img/d.jpg";
-images[4] = "img/e.jpg";
-images[5] = "img/f.jpg";
-images[6] = "img/g.jpg";
-images[7] = "img/h.jpg";
-images[8] = "img/i.jpg";
-images[9] = "img/j.jpg";
-images[10] = "img/k.jpg";
-images[11] = "img/l.jpg";
-images[12] = "img/m.jpg";
-images[13] = "img/n.jpg";
-images[14] = "img/o.jpg";
-images[15] = "img/p.jpg";
+
+var images=[];
 
 window.onload=function(){
       // file open button
@@ -165,6 +150,26 @@ function playSound(buffer) {
           console.log(bpmx);
 
           result.style.display = 'block';
+
+          images = [], x = -1;
+          images[0] = "img/a.jpg";
+          images[1] = "img/b.jpg";
+          images[2] = "img/c.jpg";
+          images[3] = "img/d.jpg";
+          images[4] = "img/e.jpg";
+          images[5] = "img/f.jpg";
+          images[6] = "img/g.jpg";
+          images[7] = "img/h.jpg";
+          images[8] = "img/i.jpg";
+          images[9] = "img/j.jpg";
+          images[10] = "img/k.jpg";
+          images[11] = "img/l.jpg";
+          images[12] = "img/m.jpg";
+          images[13] = "img/n.jpg";
+          images[14] = "img/o.jpg";
+          images[15] = "img/p.jpg";
+
+
           var xxx = Math.round(60/bpmx*1000);
           setInterval(displayNextImage, xxx);
           console.log(xxx);
@@ -173,12 +178,13 @@ function playSound(buffer) {
 function stopSound() {
       if (ssource) {
           ssource.stop();
+          window.location.reload(true);
       }
+
 }
 
 function displayNextImage() {
       x = (x === images.length - 1) ? 0 : x + 1;
       document.getElementById("img").src = images[x];
-      console.log(images[x]);
 }
 
