@@ -2,29 +2,37 @@
 	<head>
 		<meta charset="utf-8">
     	<title> Audio Visualization </title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/inputfile.css">
 	</head>
 	<body>
 		<script type="text/javascript">
     	var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-39254352-1"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="https://www.google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})()
     	</script>
 
-    	<h1> Final Project: BPM Tracking </h1>
-    	<input id="fileChooseInput" type="file"></input>
-    	<button onclick="playSound(myAudioBuffer)">Play</button>
-    	<button onclick="stopSound()">Stop</button>
-
+    	<h1 style="text-align: center"> Final Project</h1>
+    	<h3 style="text-align: center">BPM Tracking & Dancing Character</h3>
+    	<br>
+    	<div>
+	    	<div class="filebox bs3-primary preview-image">
+	    		<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;" id="fileName">
+	        	<label for="fileChooseInput">업로드</label> 
+	    		<input id="fileChooseInput" type="file" class="upload-hidden"/>
+	    		<button class="btn btn-success" onclick="playSound(myAudioBuffer)">재생</button>
+	    		<button class="btn btn-danger" onclick="stopSound()">정지</button>
+	    	</div>
+    	</div>
 		<div id="result">
-			<div id="text"></div>
-		<!--
-			<div>
-				<button id="play">Play track</button>
-			</div>
-
-			<audio id="audio"></audio>
-		-->
+			<p id="text" class="bpmtext"></p>
 		</div>
 
-		<script src="script.js"></script>
+		<p class="imgsrc">
+			<img id="img" src="img/a.jpg"></img>
+		</p>
+
+
+		<script src="js/script.js"></script>
+
 	</body>
 </html>

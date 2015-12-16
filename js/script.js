@@ -4,12 +4,28 @@
  */
 
 var result = document.querySelector('#result'),
-    text = document.querySelector('#text'),
-    audioTag = document.querySelector('#audio'),
-    playButton = document.querySelector('#play');
+    text = document.querySelector('#text');
 
 var context;
 var myAudioBuffer = null;
+var bpmx = 1;
+var images = [], x = -1;
+images[0] = "img/a.jpg";
+images[1] = "img/b.jpg";
+images[2] = "img/c.jpg";
+images[3] = "img/d.jpg";
+images[4] = "img/e.jpg";
+images[5] = "img/f.jpg";
+images[6] = "img/g.jpg";
+images[7] = "img/h.jpg";
+images[8] = "img/i.jpg";
+images[9] = "img/j.jpg";
+images[10] = "img/k.jpg";
+images[11] = "img/l.jpg";
+images[12] = "img/m.jpg";
+images[13] = "img/n.jpg";
+images[14] = "img/o.jpg";
+images[15] = "img/p.jpg";
 
 window.onload=function(){
       // file open button
@@ -18,7 +34,6 @@ window.onload=function(){
       
       // create audio context
       context = new AudioContext();
-      
    }
 
 // Function to identify peaks
@@ -88,9 +103,10 @@ function groupNeighborsByTempo(intervalCounts, sampleRate) {
 function fileChanged(e){
       var file = e.target.files[0];
       var fileReader = new FileReader();
+      document.getElementById("fileName").value = file.name;
       fileReader.onload = fileLoaded;
       fileReader.readAsArrayBuffer(file);
-   }
+    }
 
 function fileLoaded(e){
       context.decodeAudioData(e.target.result, function(buffer) {
@@ -145,9 +161,14 @@ function playSound(buffer) {
 
           text.innerHTML = 'BPM is <strong>' + Math.round(top[0].tempo);
 
-          
+          bpmx = Math.round(top[0].tempo);
+          console.log(bpmx);
 
           result.style.display = 'block';
+
+      var xxx = Math.round(60/bpmx*1000);
+      setInterval(displayNextImage, xxx);
+      console.log(xxx);
 }
 
 function stopSound() {
@@ -156,86 +177,9 @@ function stopSound() {
       }
 }
 
-/*
-audioTag.addEventListener('timeupdate', function() {
-  var progressIndicator = document.querySelector('#progress');
-  if (progressIndicator && audioTag.duration) {
-    progressIndicator.setAttribute('x', (audioTag.currentTime * 100 / audioTag.duration) + '%');
-  }
-});
-
-playButton.addEventListener('click', function() {
-  audioTag.play();
-});
-
-result.style.display = 'none';
-
-document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  result.style.display = 'none';
-  playSound(buffer).then(function(results) {
-      var track = results.tracks.items[0];
-
-      var previewUrl = track.preview_url;
-      audioTag.src = track.preview_url;
-
-      var context = new (window.AudioContext || window.webkitAudioContext) ();
-      var request = new XMLHttpRequest();
-      request.open('GET', previewUrl, true);
-      request.responseType = 'arraybuffer';
-      request.onload = function() {
-
-        // Create offline context
-        var OfflineContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-        var offlineContext = new OfflineContext(1, 2, 44100);
-
-        offlineContext.decodeAudioData(request.response, function(buffer) {
-
-          // Create buffer source
-          var source = offlineContext.createBufferSource();
-          source.buffer = buffer;
-
-          // Create filter
-          var filter = offlineContext.createBiquadFilter();
-          filter.type = "lowpass";
-
-          // Pipe the song into the filter, and the filter into the offline context
-          source.connect(filter);
-          filter.connect(offlineContext.destination);
-
-          // Schedule the song to start playing at time:0
-          source.start(0);
-
-          var peaks,
-              initialThresold = 0.9,
-              thresold = initialThresold,
-              minThresold = 0.3,
-              minPeaks = 30;
-
-          do {
-            peaks = getPeaksAtThreshold(buffer.getChannelData(0), thresold);
-            thresold -= 0.05;
-          } while (peaks.length < minPeaks && thresold >= minThresold);
-
-          
-
-          var intervals = countIntervalsBetweenNearbyPeaks(peaks);
-
-          var groups = groupNeighborsByTempo(intervals, buffer.sampleRate);
-
-          var top = groups.sort(function(intA, intB) {
-            return intB.count - intA.count;
-          }).splice(0,5);
-
-          text.innerHTML = 'BPM is <strong>' + Math.round(top[0].tempo);
-
-          
-
-          result.style.display = 'block';
-        });
-      };
-      request.send();
-    });
-});
-*/
+function displayNextImage() {
+      x = (x === images.length - 1) ? 0 : x + 1;
+      document.getElementById("img").src = images[x];
+      console.log(images[x]);
+}
 
