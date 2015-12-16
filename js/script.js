@@ -165,10 +165,9 @@ function playSound(buffer) {
           console.log(bpmx);
 
           result.style.display = 'block';
-
-      var xxx = Math.round(60/bpmx*1000);
-      setInterval(displayNextImage, xxx);
-      console.log(xxx);
+          var xxx = Math.round(60/bpmx*1000);
+          setInterval(displayNextImage, xxx);
+          console.log(xxx);
 }
 
 function stopSound() {
